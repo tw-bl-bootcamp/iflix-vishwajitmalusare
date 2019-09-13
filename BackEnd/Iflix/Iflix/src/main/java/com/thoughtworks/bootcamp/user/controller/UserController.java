@@ -17,21 +17,21 @@ import com.thoughtworks.bootcamp.response.ResponseToken;
 import com.thoughtworks.bootcamp.user.dto.LoginDTO;
 import com.thoughtworks.bootcamp.user.service.UserServiceImpl;
 
-@RequestMapping("/iflix")
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-
+@RequestMapping("/iflix")
 public class UserController {
 	@Autowired
 	UserServiceImpl userService;
 
 
 	@PostMapping("/login")
-	public ResponseEntity<ResponseToken> onLogin(@RequestBody LoginDTO loginDTO)
-			throws UserException, UnsupportedEncodingException {
+	public ResponseToken onLogin(@RequestBody LoginDTO loginDTO)
+		{
 
 		ResponseToken response = userService.onLogin(loginDTO);
 
-		return new ResponseEntity<>(response, HttpStatus.OK);
+		return response;
 	}
 }

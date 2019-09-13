@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
+    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
+    <fullyQualifiedTypeName name="com.thoughtworks.bootcamp.user.repository.UserRepository"/>
+    <fullyQualifiedTypeName name="com.thoughtworks.bootcamp.response.Response"/>
+    <fullyQualifiedTypeName name="com.thoughtworks.bootcamp.user.dto.UserDTO"/>
+    <fullyQualifiedTypeName name="com.thoughtworks.bootcamp.user.model.User"/>
+    <fullyQualifiedTypeName name="com.thoughtworks.bootcamp.utility.Utility"/>
+    <fullyQualifiedTypeName name="com.thoughtworks.bootcamp.utility.ResponseHelper"/>
+    <fullyQualifiedTypeName name="com.thoughtworks.bootcamp.response.ResponseToken"/>
+    <fullyQualifiedTypeName name="com.thoughtworks.bootcamp.user.dto.LoginDTO"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.thoughtworks.bootcamp.utility.TokenUtil"/>
+    <fullyQualifiedTypeName name="org.hibernate.cfg.Environment"/>
+    <fullyQualifiedTypeName name="org.springframework.core.env.Environment"/>
+    <fullyQualifiedTypeName name="com.thoughtworks.bootcamp.exception.UserException"/>
+</qualifiedTypeNameHistroy>

@@ -15,7 +15,7 @@ import com.thoughtworks.bootcamp.user.model.User;
 import com.thoughtworks.bootcamp.user.repository.UserRepository;
 import com.thoughtworks.bootcamp.utility.TokenUtil;
 
-@PropertySource("classpath:message.properties")
+
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
@@ -29,20 +29,19 @@ public class UserServiceImpl implements UserService {
 	Environment environment;
 
 	@Override
-	public ResponseToken onLogin(LoginDTO loginDto) throws UserException, UnsupportedEncodingException {
+	public ResponseToken onLogin(LoginDTO loginDto) {
 		Optional<User> user = userRepo.findByEmailId(loginDto.getEmailId());
-		ResponseToken response = new ResponseToken();
+		ResponseToken response =null;
 		if (user.isPresent()) {
 			if(loginDto.getEmailId().equals(user.get().getEmailId())
 				&& loginDto.getPassword().equals(user.get().getPassword())){
 					String token = tokenUtil.createToken(user.get().getUserId());
-					response.setToken(token);
-					response.setStatusCode(200);
-					response.setStatusMessage(environment.getProperty("user.login"));
+					return new ResponseToken("succesfully",200,token);
 				}
-				throw new UserException(401,environment.getProperty("user.login.password"));
+			return new ResponseToken("not valid password",400,"");
 			}
-		throw new UserException(401,environment.getProperty("user.login.verification"));
+		return new ResponseToken("not valid user",400,"");
+		
 		}
 
 	}

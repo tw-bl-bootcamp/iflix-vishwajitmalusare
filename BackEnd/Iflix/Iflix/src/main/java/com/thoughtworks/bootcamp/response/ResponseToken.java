@@ -36,4 +36,17 @@ public class ResponseToken {
 				+ "]";
 	}
 
+	public ResponseToken() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ResponseToken(String statusMessage, int statusCode, String token) {
+		super();
+		this.statusMessage = statusMessage;
+		this.statusCode = statusCode;
+		this.token = token;
+	}
+	
+
 }
