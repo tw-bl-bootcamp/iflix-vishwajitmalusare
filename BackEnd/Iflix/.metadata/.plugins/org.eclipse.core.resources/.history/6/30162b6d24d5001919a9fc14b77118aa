@@ -1,0 +1,8 @@
+package com.thoughtworks.bootcamp.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Entity
+public class UserController {
+
+}

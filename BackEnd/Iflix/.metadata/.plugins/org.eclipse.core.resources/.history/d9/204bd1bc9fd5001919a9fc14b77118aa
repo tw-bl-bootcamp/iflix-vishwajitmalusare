@@ -1,0 +1,49 @@
+package com.thoughtworks.bootcamp.user.service;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Service;
+
+import com.thoughtworks.bootcamp.exception.UserException;
+import com.thoughtworks.bootcamp.response.ResponseToken;
+import com.thoughtworks.bootcamp.user.dto.LoginDTO;
+import com.thoughtworks.bootcamp.user.model.User;
+import com.thoughtworks.bootcamp.user.repository.UserRepository;
+import com.thoughtworks.bootcamp.utility.TokenUtil;
+
+@PropertySource("classpath:message.properties")
+@Service("userService")
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private UserRepository userRepo;
+	
+	@Autowired
+	private TokenUtil userToken;
+
+	@Override
+	public ResponseToken onLogin(LoginDTO loginDto) throws UserException, UnsupportedEncodingException {
+		Optional<User> user = userRepo.findByEmailId(loginDto.getEmailId());
+		ResponseToken response ;
+		if (user.isPresent()) {	
+			if(loginDto.getEmailId().equals(user.get().getEmailId()) && 
+					loginDto.getPassword().equals(user.get().getPassword())) {
+				
+				String generatedToken = userToken.createToken(user.get().getUserId());
+				
+				return response = new ResponseToken("Succesfully Login",200,generatedToken);
+			}
+			else {
+				return response = new ResponseToken("password is not matching", 204,"");
+			}
+		}
+			return response = new ResponseToken("User not registered",400,"");
+		}
+
+	}
+
+

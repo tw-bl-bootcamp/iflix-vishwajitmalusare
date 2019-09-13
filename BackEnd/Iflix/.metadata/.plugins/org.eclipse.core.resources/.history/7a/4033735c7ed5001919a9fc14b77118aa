@@ -1,0 +1,23 @@
+package com.thoughtworks.bootcamp.user.service;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.thoughtworks.bootcamp.exception.UserException;
+import com.thoughtworks.bootcamp.response.Response;
+import com.thoughtworks.bootcamp.response.ResponseToken;
+import com.thoughtworks.bootcamp.user.dto.LoginDTO;
+import com.thoughtworks.bootcamp.user.dto.UserDTO;
+import com.thoughtworks.bootcamp.user.model.User;
+
+
+@Service
+public interface UserService {
+
+	ResponseToken onLogin(LoginDTO loginDto) throws UserException, UnsupportedEncodingException;
+
+	ResponseToken authentication(Optional<User> user, String password);
+
+}

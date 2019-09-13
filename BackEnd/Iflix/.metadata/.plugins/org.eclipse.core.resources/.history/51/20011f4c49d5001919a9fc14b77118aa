@@ -1,0 +1,82 @@
+package com.thoughtworks.bootcamp.user.service;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Optional;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.thoughtworks.bootcamp.exception.UserException;
+import com.thoughtworks.bootcamp.response.Response;
+import com.thoughtworks.bootcamp.response.ResponseToken;
+import com.thoughtworks.bootcamp.user.dto.LoginDTO;
+import com.thoughtworks.bootcamp.user.dto.UserDTO;
+import com.thoughtworks.bootcamp.user.model.User;
+import com.thoughtworks.bootcamp.user.repository.UserRepository;
+import com.thoughtworks.bootcamp.utility.ResponseHelper;
+import com.thoughtworks.bootcamp.utility.TokenUtil;
+import com.thoughtworks.bootcamp.utility.Utility;
+
+@PropertySource("classpath:message.properties")
+@Service("userService")
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private UserRepository userRepo;
+
+	@Autowired
+	private ModelMapper modelMapper;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private TokenUtil tokenUtil;
+
+	@Autowired
+	private Response statusResponse;
+ 
+	@Autowired
+	private Environment environment;
+
+		@Override
+	public ResponseToken onLogin(LoginDTO loginDto) throws UserException, UnsupportedEncodingException {
+		Optional<User> user = userRepo.findByEmailId(loginDto.getEmailId());
+		ResponseToken response = new ResponseToken();
+		if (user.isPresent()) {
+
+			return authentication(user, loginDto.getPassword());
+
+		}
+
+		System.out.println("response is " + response);
+		return response;
+
+	}
+
+	@Override
+	public ResponseToken authentication(Optional<User> user, String password) {
+
+		ResponseToken response = new ResponseToken();
+		if (user.get() != null) {
+			boolean status = passwordEncoder.matches(password, user.get().getPassword());
+
+			if (status == true) {
+				String token = tokenUtil.createToken(user.get().getUserId());
+				response.setToken(token);
+				response.setStatusCode(200);
+				response.setStatusMessage(environment.getProperty("user.login"));
+				return response;
+			}
+
+			throw new UserException(401, environment.getProperty("user.login.password"));
+		}
+
+		throw new UserException(401, environment.getProperty("user.login.verification"));
+	}
+
+	}

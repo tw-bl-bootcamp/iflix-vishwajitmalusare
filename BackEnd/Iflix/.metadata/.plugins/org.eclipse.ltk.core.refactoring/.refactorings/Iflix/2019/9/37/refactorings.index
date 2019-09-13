@@ -1,0 +1,12 @@
+1568268869442	Delete element
+1568269020531	Rename package 'user.controller'
+1568269054963	Rename package 'user.dto'
+1568269081424	Rename package 'user.model'
+1568269184337	Rename package 'user.service'
+1568269208942	Rename package 'user.repository'
+1568269990798	Rename package 'utility'
+1568270072613	Rename package 'configuration'
+1568270098409	Rename package 'response'
+1568270223788	Rename package 'exception'
+1568278510767	Encapsulate field 'isVerify'
+1568307391409	Delete element
