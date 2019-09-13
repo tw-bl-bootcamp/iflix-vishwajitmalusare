@@ -9,10 +9,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
-import SideBarMenu from "./SideBarMenu";
-import CreateNotes from "./CreateNotes";
-import { logoutService } from "../services/userServices";
-import ShowNotes from "../components/ShowNotes";
+import SideBarMenu from "./SideMenuBar";
 import Tooltip from "@material-ui/core/Tooltip";
 import GridView from "@material-ui/icons/ViewAgendaOutlined";
 import ListView from "@material-ui/icons/BorderAllRounded";
@@ -28,7 +25,7 @@ const thm = createMuiTheme({
         width: 240,
         background: "white",
         border: "transparent"
-      },
+      }, 
       paperAnchorDockedLeft: {
         borderColor: "white"
       }
@@ -77,19 +74,7 @@ export class Dashboard extends Component {
     this.setState({ grid: !this.state.grid });
   };
 
-  handleLogout = event => {
-    event.preventDefault();
-    const accessToken = localStorage.getItem("token");
-    logoutService(accessToken)
-      .then(response => {
-        console.log(response.data.message);
-        localStorage.clear();
-        this.props.history.push("/login");
-      })
-      .catch(error => {
-        console.log("Oops, Something went wrong!", error);
-      });
-  };
+
 
   render() {
     return (
@@ -169,12 +154,6 @@ export class Dashboard extends Component {
             <SideBarMenu appBarProps={this.state.open} />
           </AppBar>
         </MuiThemeProvider>
-        <div className="note-create">
-          <CreateNotes />
-        </div>
-        <div className="show-notes">
-          <ShowNotes props={this.props} grid={this.state.grid} />
-        </div>
       </div>
     );
   }

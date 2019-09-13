@@ -1,14 +1,11 @@
 package com.thoughtworks.bootcamp.user.service;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
-import com.thoughtworks.bootcamp.exception.UserException;
 import com.thoughtworks.bootcamp.response.ResponseToken;
 import com.thoughtworks.bootcamp.user.dto.LoginDTO;
 import com.thoughtworks.bootcamp.user.model.User;

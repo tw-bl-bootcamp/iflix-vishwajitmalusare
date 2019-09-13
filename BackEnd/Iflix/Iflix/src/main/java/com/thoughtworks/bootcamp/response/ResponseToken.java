@@ -36,10 +36,7 @@ public class ResponseToken {
 				+ "]";
 	}
 
-	public ResponseToken() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 
 	public ResponseToken(String statusMessage, int statusCode, String token) {
 		super();
