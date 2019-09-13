@@ -4,18 +4,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
-import SideBarMenu from "./SideMenuBar";
-import Tooltip from "@material-ui/core/Tooltip";
 import GridView from "@material-ui/icons/ViewAgendaOutlined";
 import ListView from "@material-ui/icons/BorderAllRounded";
-import RefreshIcon from "@material-ui/icons/Refresh";
-import InputBase from "@material-ui/core/InputBase";
-import Search from "@material-ui/icons/Search";
 
 const thm = createMuiTheme({
   overrides: {
@@ -93,34 +84,16 @@ export class Dashboard extends Component {
               </IconButton>
               <img
                 className="img"
-                src={require("../assets/fundoo_img.png")}
-                alt="fundoo icon"
+                src={require("../assets/film_img.png")}
+                alt="iflix icon"
               />
               &nbsp;
               <div className="titleName">
                 <Typography variant="h6" className="title">
-                  FundooNotes
+                  Iflix
                 </Typography>
               </div>
-              <div className="search">
-                <div className="searchIcon">
-                  <Tooltip title="Search">
-                    <IconButton>
-                      <Search />
-                    </IconButton>
-                  </Tooltip>
-                </div>
-                <div className="searchInput">
-                  <InputBase placeholder="Search" id="searchInputBase" />
-                </div>
-              </div>
-              <div className="refreshGridProfile">
-                <IconButton>
-                  <Tooltip title="Refresh">
-                    <RefreshIcon onClick={this.refreshHandler} />
-                  </Tooltip>
-                </IconButton>
-
+              <div>
                 {!this.state.grid ? (
                   <IconButton onClick={this.gridHandler}>
                     <GridView />
@@ -131,27 +104,7 @@ export class Dashboard extends Component {
                   </IconButton>
                 )}
               </div>
-              <PopupState variant="popover" popupId="demo-popup-menu">
-                {PopupState => (
-                  <React.Fragment>
-                    <IconButton
-                      aria-label="Account of current user"
-                      aria-controls="menu-appbar"
-                      aria-haspopup="true"
-                      color="inherit"
-                      {...bindTrigger(PopupState)}
-                    >
-                      <AccountCircle />
-                    </IconButton>
-
-                    <Menu {...bindMenu(PopupState)} color="inherit">
-                      <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
-                    </Menu>
-                  </React.Fragment>
-                )}
-              </PopupState>
-            </Toolbar>
-            <SideBarMenu appBarProps={this.state.open} />
+              </Toolbar>
           </AppBar>
         </MuiThemeProvider>
       </div>
