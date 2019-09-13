@@ -71,7 +71,7 @@ hs_err_pid*
 # End of https://www.gitignore.io/api/java
 ### STS ###
 .apt_generated
-.classpath
+:.classpath
 .factorypath
 .project
 .settings
